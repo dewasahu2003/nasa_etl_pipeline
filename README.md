@@ -1,8 +1,7 @@
 # 🚀 NASA Astronomy Picture of the Day ETL Pipeline
 
 ## 📋 Project Overview
-
-A robust ETL (Extract, Transform, Load) pipeline that leverages Apache Airflow to fetch, process, and store NASA's Astronomy Picture of the Day data using Docker, PostgreSQL, and the NASA API.
+A robust ETL pipeline leveraging Apache Airflow to fetch, process, and store NASA's Astronomy Picture of the Day data using Docker, PostgreSQL, and the NASA API.
 
 ## 🛠️ Tech Stack
 - Apache Airflow
@@ -12,10 +11,10 @@ A robust ETL (Extract, Transform, Load) pipeline that leverages Apache Airflow t
 - Astro CLI
 
 ## ✨ Key Features
-- Automated daily data extraction from NASA API
+- Automated daily NASA API data extraction
 - Containerized development environment
 - Efficient data transformation
-- Persistent storage in PostgreSQL
+- Persistent PostgreSQL storage
 - Comprehensive workflow management
 
 ## 🏗️ Architecture Diagram
@@ -26,22 +25,22 @@ NASA API → Airflow (Extract) → Transform → PostgreSQL (Load)
 ## 🔍 Pipeline Components
 
 ### 1. Extract
-- Uses `SimpleHttpOperator` to fetch data from NASA API
+- `SimpleHttpOperator` for NASA API data fetching
 - Retrieves daily astronomy picture details
-- Handles API authentication and request management
+- Manages API authentication
 
 ### 2. Transform
-- Utilizes Airflow's TaskFlow API with `@task` decorator
-- Extracts critical information:
+- Airflow TaskFlow API with `@task` decorator
+- Extracts key information:
   - Date
   - Title
   - Explanation
   - Image URL
 
 ### 3. Load
-- Implements `PostgresHook` for database interactions
-- Automatically creates table if not exists
-- Inserts transformed data into PostgreSQL
+- `PostgresHook` for database interactions
+- Automatic table creation
+- Data insertion into PostgreSQL
 
 ## 🖼️ Project Screenshots
 
@@ -51,7 +50,7 @@ NASA API → Airflow (Extract) → Transform → PostgreSQL (Load)
 ### PostgreSQL Database View
 ![PostgreSQL Database](https://github.com/user-attachments/assets/ea04680d-8239-4f5a-ac21-7b1b58d68f42)
 
-## 🚀 Getting Started
+## 🚀 Local Development Setup
 
 ### Prerequisites
 - Docker Desktop
@@ -59,56 +58,73 @@ NASA API → Airflow (Extract) → Transform → PostgreSQL (Load)
 - Astro CLI
 
 ### Installation Steps
-1. Install Astro CLI
 ```bash
+# Install Astro CLI
 winget install -e --id Astronomer.Astro
-```
 
-2. Clone the repository
-```bash
+# Clone repository
 git clone <repository-url>
 cd nasa-astronomy-etl
-```
 
-3. Install dependencies
-```bash
+# Install dependencies
 pip install -r requirements.txt
-```
 
-4. Start Docker Desktop
-
-5. Initialize Airflow
-```bash
+# Start Docker Desktop
+# Initialize Airflow
 astro dev start
 ```
 
-### Airflow Configuration
+## 🔧 Airflow Configuration
 1. Open Airflow Web UI
 2. Navigate to Admin → Connections
-3. Configure two connections:
+3. Configure connections:
    - NASA API Connection
    - PostgreSQL Database Connection
 
-## 🔧 Configuration Details
+### Connection Details
 
-### NASA API Connection
-- Conn Type: HTTP
+#### NASA API Connection
+- Type: HTTP
 - Host: `https://api.nasa.gov`
 - Extra: Include API key
 
-### PostgreSQL Connection
-- Conn Type: Postgres
-- Host: `paste complete name of postgress container running under the astro docker images`
+#### PostgreSQL Connection
+- Type: Postgres
+- Host: `postgres container name`
 - Schema: `postgres`
 - Login: `postgres`
 - Password: `postgres`
 - Port: `5432`
 
-## 📦 Docker Services
-- Airflow Webserver
-- Airflow Scheduler
-- PostgreSQL Database
-- Redis (Optional message broker)
+## ☁️ Cloud Deployment with AWS
+
+### RDS Database Setup
+1. Create AWS RDS PostgreSQL instance
+2. Allow public access
+3. Configure security group (Port 5432)
+
+### Astronomer Deployment
+```bash
+# Login to Astronomer
+astro login
+
+# Create workspace and deployment
+astro deploy --dag
+```
+
+## 🖼️ Cloud Deployment Screenshots
+
+### AWS RDS Database
+![Amazon RDS](https://github.com/user-attachments/assets/a32d8010-8cbd-4337-9558-7370e96fc0b2)
+
+### Astronomer Dashboard
+![Astronomer DAG 1](https://github.com/user-attachments/assets/79536d17-77dc-455a-8024-2966beedf0d3)
+
+### Astronomer Airflow UI
+![Astronomer DAG](https://github.com/user-attachments/assets/67080298-3d1f-45f3-bfef-dbaec54723dd)
+
+### DBeaver AWS Database Table View
+![DBeaver Table AWS](https://github.com/user-attachments/assets/eb4095c7-b78d-4385-ad81-7c5f75a744a0)
 
 ## 🌟 Benefits
 - Reproducible environment
@@ -118,19 +134,16 @@ astro dev start
 - Comprehensive logging
 
 ## 🤝 Contributing
-1. Fork the repository
-2. Create your feature branch
+1. Fork repository
+2. Create feature branch
 3. Commit changes
-4. Push to the branch
-5. Create a Pull Request
+4. Push branch
+5. Create Pull Request
 
-## 📄 License
-[Specify your license - e.g., MIT]
-
-## 🔗 Additional Resources
-- [Apache Airflow Documentation](https://airflow.apache.org/docs/)
-- [NASA API Documentation](https://api.nasa.gov/)
-- [Docker Documentation](https://docs.docker.com/)
+## 🔗 Resources
+- [Apache Airflow Docs](https://airflow.apache.org/docs/)
+- [NASA API Docs](https://api.nasa.gov/)
+- [Docker Docs](https://docs.docker.com/)
 
 ---
-*Powered by Airflow, Docker, and NASA's Open API*
+*Powered by Airflow, Docker, NASA API*
